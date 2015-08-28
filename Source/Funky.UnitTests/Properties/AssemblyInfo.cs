@@ -4,15 +4,15 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Reflections.UnitTests")]
-[assembly: AssemblyDescription("Unit Tests for the Reflections Library of Reflection Extensions.")]
+[assembly: AssemblyTitle("Funky.UnitTests")]
+[assembly: AssemblyDescription("Unit Tests for the Funky Library of Reflection Extensions.")]
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]
 #else
 [assembly: AssemblyConfiguration("Release")]
 #endif
 [assembly: AssemblyCompany("Eric Burcham")]
-[assembly: AssemblyProduct("Reflections")]
+[assembly: AssemblyProduct("Funky")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
