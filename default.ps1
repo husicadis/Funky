@@ -2,8 +2,8 @@
 $msbuildExe = Get-Item "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe"
 $nugetExe = Get-Item ".\Source\.nuget\NuGet.exe"
 $packageDirectory = ".\Packages"
-$reflectionsProject = ".\Source\Reflections\Reflections.csproj"
-$solutionFile = ".\Source\Reflections.sln"
+$reflectionsProject = ".\Source\Funky\Funky.csproj"
+$solutionFile = ".\Source\Funky.sln"
 
 
 
@@ -40,7 +40,7 @@ function Test-ReparsePoint([string]$path) {
 
 
 # Psake tasks -------------------------------------------------------------------------------------
-task default -depends CleanAll, RestorePackages, BuildDebug, BuildRelease, PackReflections
+task default -depends CleanAll, RestorePackages, BuildDebug, BuildRelease, PackFunky
 
 task ? -description "Writes task documentation to the console." {
     WriteDocumentation
@@ -50,17 +50,17 @@ task BuildAllConfigurations -description "Builds all valid solution configuratio
 
 task BuildAllConfigurationsWithPrerequisites -description "Builds all valid solution configurations.  Runs prerequisites first." -depends RestorePackages, BuildDebug, BuildRelease
 
-task BuildDebug -description "Builds Reflections.sln in the debug configuration." {
+task BuildDebug -description "Builds Funky.sln in the debug configuration." {
 	Invoke-Compile $SolutionFile "Debug" "Any CPU"
 }
 
-task BuildDebugWithPrerequisites -description "Builds Reflections.sln in the debug configuration.  Runs prerequisite steps first." -depends RestorePackages, BuildDebug
+task BuildDebugWithPrerequisites -description "Builds Funky.sln in the debug configuration.  Runs prerequisite steps first." -depends RestorePackages, BuildDebug
 
-task BuildRelease -description "Builds Reflections.sln in the release configuration." {
+task BuildRelease -description "Builds Funky.sln in the release configuration." {
 	Invoke-Compile $SolutionFile "Release" "Any CPU"
 }
 
-task BuildReleaseWithPrerequisites -description "Builds Reflections.sln in the debug configuration.  Runs prerequisite steps first." -depends RestorePackages, BuildRelease
+task BuildReleaseWithPrerequisites -description "Builds Funky.sln in the debug configuration.  Runs prerequisite steps first." -depends RestorePackages, BuildRelease
 
 task CleanAll -description "Runs a git clean -xdf.  Prompts first if untracked files are found." {
     $gitStatus = (@(git status --porcelain) | Out-String)
@@ -87,28 +87,28 @@ task CleanAll -description "Runs a git clean -xdf.  Prompts first if untracked f
 	}
 }
 
-task PackReflections -description "Packs Reflections as a nuget package." {
+task PackFunky -description "Packs Funky as a nuget package." {
 	Delete-Directory $packageDirectory
     Create-Directory $packageDirectory
 	exec { & $nugetExe pack $reflectionsProject -OutputDirectory $packageDirectory -Prop Configuration=Release -Symbols }
 }
 
-task PackReflectionsWithPrerequisites -description "Packs Reflections as a nuget package.  Runs prerequisites first." -depends RestorePackages, BuildDebug, BuildRelease, PackReflections
+task PackFunkyWithPrerequisites -description "Packs Funky as a nuget package.  Runs prerequisites first." -depends RestorePackages, BuildDebug, BuildRelease, PackFunky
 
-task PushReflections -description "Pushes Reflections to nuget.org." {
-	$packages = Get-ChildItem $packageDirectory\Reflections.*.nupkg
+task PushFunky -description "Pushes Funky to nuget.org." {
+	$packages = Get-ChildItem $packageDirectory\Funky.*.nupkg
 	foreach ($package in $packages)
 	{
 		exec { & $nugetExe push $package.FullName }
 	}
 }
 
-task PushReflectionsWithPrerequisites -depends RestorePackages, BuildDebug, BuildRelease, PackReflections, PushReflections -description "Pushes Relfections to nuget.org.  Runs prerequisites first."
+task PushFunkyWithPrerequisites -depends RestorePackages, BuildDebug, BuildRelease, PackFunky, PushFunky -description "Pushes Relfections to nuget.org.  Runs prerequisites first."
 
 task RestorePackages -description "Restores all nuget packages in the solution." {
 	exec { & $nugetExe restore $solutionFile }
 }
 
-task Start:VisualStudio -description "Opens Reflections.sln in Visual Studio" {
-    Invoke-Item .\Source\Reflections.sln
+task Start:VisualStudio -description "Opens Funky.sln in Visual Studio" {
+    Invoke-Item .\Source\Funky.sln
 }
