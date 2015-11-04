@@ -2,6 +2,9 @@
 
 namespace Funky
 {
+    /// <summary>
+    /// Provides utility methods for Func <see langword="delegate"/>s.
+    /// </summary>
     public static class FuncExtensions
     {
         /// <summary>
@@ -26,7 +29,7 @@ namespace Funky
                 memoizer = new Memoizer<T, TResult>(func);
             }
 
-            return argument => memoizer[argument];
+            return argument => memoizer.GetOrAdd(argument);
         }
 
         /// <summary>

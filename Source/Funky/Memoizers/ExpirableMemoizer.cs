@@ -3,25 +3,29 @@
 namespace Funky
 {
     /// <summary>
-    /// Represents a thread-safe memoizer for a <see cref="Func{TKey, TValue}"/> backed by a collection of key/value pairs that can be accessed by multiple threads concurrently.
+    /// Represents a thread-safe memoizer for a given <see cref="Func{TKey, TValue}"/>.  The memoizer's cached values can be expire and be garbage-collected.
     /// </summary>
-    /// <typeparam name="TKey">The type of the keys in the memoizer.</typeparam>
-    /// <typeparam name="TValue">The type of the values in the memoizer.</typeparam>
+    /// <typeparam name="TKey">The type of the memoizer's keys.</typeparam>
+    /// <typeparam name="TValue">The type of the memoizer's return values.</typeparam>
     public class ExpirableMemoizer<TKey, TValue> : MemoizerBase<TKey, TValue, WeakReference>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExpirableMemoizer{TKey, TValue}"/> class.
+        /// </summary>
+        /// <param name="func">The encapsulated method that this memoizer will memoize.</param>
         public ExpirableMemoizer(Func<TKey, TValue> func)
             : base(func)
         {
         }
 
-        protected override TValue SetCacheValue(TKey key)
+        protected override TValue SetValue(TKey key)
         {
             var value = Func(key);
             Cache.Add(key, new WeakReference(value));
             return value;
         }
 
-        protected override TValue GetCacheValue(TKey key)
+        protected override TValue GetValue(TKey key)
         {
             TValue value;
             var weakReference = Cache[key];
@@ -38,7 +42,7 @@ namespace Funky
             return value;
         }
 
-        protected override bool CheckCacheValue(TKey key)
+        protected override bool ContainsKey(TKey key)
         {
             return Cache.ContainsKey(key);
         }
