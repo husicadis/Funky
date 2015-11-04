@@ -47,7 +47,7 @@
     <Compile Include="FuncExtensions.cs" />
     <Compile Include="Memoizers\Memoizer.cs" />
     <Compile Include="Memoizers\MemoizerBase.cs" />
-    <Compile Include="Memoizers\IMemoizeFuncs.cs" />
+    <Compile Include="Memoizers\IMemoizeThings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

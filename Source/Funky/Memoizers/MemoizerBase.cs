@@ -4,9 +4,15 @@ using System.Threading;
 
 namespace Funky
 {
-    public abstract class MemoizerBase<TArg, TResult, TCache> : IMemoizeFuncs<TArg, TResult>
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TKey"></typeparam>
+    /// <typeparam name="TValue"></typeparam>
+    /// <typeparam name="TCachedValue"></typeparam>
+    public abstract class MemoizerBase<TKey, TValue, TCachedValue> : IMemoizeThings<TKey, TValue>
     {
-        protected MemoizerBase(Func<TArg, TResult> func)
+        protected MemoizerBase(Func<TKey, TValue> func)
             : this()
         {
             Func = func;
@@ -14,18 +20,23 @@ namespace Funky
 
         private MemoizerBase()
         {
-            Cache = new Dictionary<TArg, TCache>();
+            Cache = new Dictionary<TKey, TCachedValue>();
             CacheLock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
         }
 
-        public TResult GetOrInvoke(TArg key)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public TValue GetOrInvoke(TKey key)
         {
-            TResult result;
+            TValue result;
 
             CacheLock.EnterWriteLock();
             try
             {
-                result = ValueExists(key) ? GetCacheValue(key) : SetCacheValue(key);
+                result = CheckCacheValue(key) ? GetCacheValue(key) : SetCacheValue(key);
             }
             finally
             {
@@ -35,16 +46,16 @@ namespace Funky
             return result;
         }
 
-        protected abstract TResult SetCacheValue(TArg key);
+        protected abstract bool CheckCacheValue(TKey key);
 
-        protected abstract TResult GetCacheValue(TArg key);
+        protected abstract TValue SetCacheValue(TKey key);
 
-        protected abstract bool ValueExists(TArg key);
+        protected abstract TValue GetCacheValue(TKey key);
 
-        protected Dictionary<TArg, TCache> Cache { get; private set; }
+        protected Dictionary<TKey, TCachedValue> Cache { get; private set; }
 
-        protected ReaderWriterLockSlim CacheLock { get; private set; }
+        protected ReaderWriterLockSlim CacheLock { get; }
 
-        protected Func<TArg, TResult> Func { get; private set; }
+        protected Func<TKey, TValue> Func { get; private set; }
     }
 }
