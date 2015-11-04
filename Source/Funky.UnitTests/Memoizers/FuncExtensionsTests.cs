@@ -25,10 +25,10 @@ namespace Funky.UnitTests.Memoizers
                 return i * i;
             };
 
-            var memoized = getValueSquared.Memoize(false);
+            var memoized = getValueSquared.Memoize();
 
             // Act
-            Parallel.For(0, 5000, AssertTwoSquaredIsFour(memoized));
+            Parallel.For(0, 100, AssertTwoSquaredIsFour(memoized));
 
             // Assert
             callCount.Should().Be(1);
@@ -39,7 +39,7 @@ namespace Funky.UnitTests.Memoizers
         {
             // Arrange
             var callCount = 0;
-            const int ThreadCount = 5000;
+            const int ThreadCount = 100;
 
             Func<int, int> getValueSquared = i =>
             {

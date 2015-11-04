@@ -14,9 +14,9 @@ namespace Funky
 
         public static Func<TArg, TResult> Memoize<TArg, TResult>(
             this Func<TArg, TResult> func,
-            bool isExpirable)
+            bool isExpirable = false)
         {
-            IMemoizeFunctions<TArg, TResult> memoizer;
+            IMemoizeFuncs<TArg, TResult> memoizer;
             if (isExpirable)
             {
                 memoizer = new ExpirableMemoizer<TArg, TResult>(func);

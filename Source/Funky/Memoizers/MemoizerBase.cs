@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace Funky
 {
-    public abstract class MemoizerBase<TArg, TResult, TCache> : IMemoizeFunctions<TArg, TResult>
+    public abstract class MemoizerBase<TArg, TResult, TCache> : IMemoizeFuncs<TArg, TResult>
     {
         protected MemoizerBase(Func<TArg, TResult> func)
             : this()
