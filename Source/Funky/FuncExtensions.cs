@@ -5,13 +5,13 @@ namespace Funky
     public static class FuncExtensions
     {
         /// <summary>
-        /// Memoizes a <paramref name="func"/> that has 1 parameter and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
+        /// Memoizes an encapsulated method that has 1 parameter and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
         /// </summary>
-        /// <typeparam name="T">The type of the first parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="TResult">The type of the retun value of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <param name="func">The function that will be memoized.</param>
+        /// <typeparam name="T">The type of the first parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="TResult">The type of the retun value of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <param name="func">The encapsulated method that this delegate will memoize.</param>
         /// <param name="isExpirable">A value that specifies whether the garbage collector can collect the memoized values.</param>
-        /// <returns>A memoized version of the given <paramref name="func"/>.</returns>
+        /// <returns>A memoized version of the encapsulated method represented by the <paramref name="func"/> parameter.</returns>
         public static Func<T, TResult> Memoize<T, TResult>(
             this Func<T, TResult> func,
             bool isExpirable = false)
@@ -25,18 +25,19 @@ namespace Funky
             {
                 memoizer = new Memoizer<T, TResult>(func);
             }
+
             return argument => memoizer.GetOrInvoke(argument);
         }
 
         /// <summary>
-        /// Memoizes a <paramref name="func"/> that has 2 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
+        /// Memoizes an encapsulated method that has 2 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
         /// </summary>
-        /// <typeparam name="T1">The type of the first parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="T2">The type of the second parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="TResult">The type of the retun value of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <param name="func">The function that will be memoized.</param>
+        /// <typeparam name="T1">The type of the first parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="T2">The type of the second parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="TResult">The type of the retun value of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <param name="func">The encapsulated method that this delegate will memoize.</param>
         /// <param name="isExpirable">A value that specifies whether the garbage collector can collect the memoized values.</param>
-        /// <returns>A memoized version of the given <paramref name="func"/>.</returns>
+        /// <returns>A memoized version of the encapsulated method represented by the <paramref name="func"/> parameter.</returns>
         public static Func<T1, T2, TResult> Memoize<T1, T2, TResult>(
             this Func<T1, T2, TResult> func,
             bool isExpirable = false)
@@ -48,15 +49,15 @@ namespace Funky
         }
 
         /// <summary>
-        /// Memoizes a <paramref name="func"/> that has 3 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
+        /// Memoizes an encapsulated method that has 3 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
         /// </summary>
-        /// <typeparam name="T1">The type of the first parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="T2">The type of the second parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T3">The type of the third parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="TResult">The type of the retun value of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <param name="func">The function that will be memoized.</param>
+        /// <typeparam name="T1">The type of the first parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="T2">The type of the second parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T3">The type of the third parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="TResult">The type of the retun value of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <param name="func">The encapsulated method that this delegate will memoize.</param>
         /// <param name="isExpirable">A value that specifies whether the garbage collector can collect the memoized values.</param>
-        /// <returns>A memoized version of the given <paramref name="func"/>.</returns>
+        /// <returns>A memoized version of the encapsulated method represented by the <paramref name="func"/> parameter.</returns>
         public static Func<T1, T2, T3, TResult> Memoize<T1, T2, T3, TResult>(
             this Func<T1, T2, T3, TResult> func,
             bool isExpirable = false)
@@ -68,16 +69,16 @@ namespace Funky
         }
 
         /// <summary>
-        /// Memoizes a <paramref name="func"/> that has 4 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
+        /// Memoizes an encapsulated method that has 4 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
         /// </summary>
-        /// <typeparam name="T1">The type of the first parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="T2">The type of the second parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T3">The type of the third parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T4">The type of the fourth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="TResult">The type of the retun value of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <param name="func">The function that will be memoized.</param>
+        /// <typeparam name="T1">The type of the first parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="T2">The type of the second parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T3">The type of the third parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T4">The type of the fourth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="TResult">The type of the retun value of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <param name="func">The encapsulated method that this delegate will memoize.</param>
         /// <param name="isExpirable">A value that specifies whether the garbage collector can collect the memoized values.</param>
-        /// <returns>A memoized version of the given <paramref name="func"/>.</returns>
+        /// <returns>A memoized version of the encapsulated method represented by the <paramref name="func"/> parameter.</returns>
         public static Func<T1, T2, T3, T4, TResult> Memoize<T1, T2, T3, T4, TResult>(
             this Func<T1, T2, T3, T4, TResult> func,
             bool isExpirable = false)
@@ -89,17 +90,17 @@ namespace Funky
         }
 
         /// <summary>
-        /// Memoizes a <paramref name="func"/> that has 5 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
+        /// Memoizes an encapsulated method that has 5 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
         /// </summary>
-        /// <typeparam name="T1">The type of the first parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="T2">The type of the second parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T3">The type of the third parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T4">The type of the fourth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T5">The type of the fifth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="TResult">The type of the retun value of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <param name="func">The function that will be memoized.</param>
+        /// <typeparam name="T1">The type of the first parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="T2">The type of the second parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T3">The type of the third parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T4">The type of the fourth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T5">The type of the fifth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="TResult">The type of the retun value of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <param name="func">The encapsulated method that this delegate will memoize.</param>
         /// <param name="isExpirable">A value that specifies whether the garbage collector can collect the memoized values.</param>
-        /// <returns>A memoized version of the given <paramref name="func"/>.</returns>
+        /// <returns>A memoized version of the encapsulated method represented by the <paramref name="func"/> parameter.</returns>
         public static Func<T1, T2, T3, T4, T5, TResult> Memoize<T1, T2, T3, T4, T5, TResult>(
             this Func<T1, T2, T3, T4, T5, TResult> func,
             bool isExpirable = false)
@@ -111,18 +112,18 @@ namespace Funky
         }
 
         /// <summary>
-        /// Memoizes a <paramref name="func"/> that has 6 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
+        /// Memoizes an encapsulated method that has 6 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
         /// </summary>
-        /// <typeparam name="T1">The type of the first parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="T2">The type of the second parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T3">The type of the third parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T4">The type of the fourth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T5">The type of the fifth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T6">The type of the sixth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="TResult">The type of the retun value of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <param name="func">The function that will be memoized.</param>
+        /// <typeparam name="T1">The type of the first parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="T2">The type of the second parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T3">The type of the third parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T4">The type of the fourth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T5">The type of the fifth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T6">The type of the sixth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="TResult">The type of the retun value of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <param name="func">The encapsulated method that this delegate will memoize.</param>
         /// <param name="isExpirable">A value that specifies whether the garbage collector can collect the memoized values.</param>
-        /// <returns>A memoized version of the given <paramref name="func"/>.</returns>
+        /// <returns>A memoized version of the encapsulated method represented by the <paramref name="func"/> parameter.</returns>
         public static Func<T1, T2, T3, T4, T5, T6, TResult> Memoize<T1, T2, T3, T4, T5, T6, TResult>(
             this Func<T1, T2, T3, T4, T5, T6, TResult> func,
             bool isExpirable = false)
@@ -134,19 +135,19 @@ namespace Funky
         }
 
         /// <summary>
-        /// Memoizes a <paramref name="func"/> that has 7 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
+        /// Memoizes an encapsulated method that has 7 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
         /// </summary>
-        /// <typeparam name="T1">The type of the first parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="T2">The type of the second parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T3">The type of the third parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T4">The type of the fourth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T5">The type of the fifth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T6">The type of the sixth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T7">The type of the seventh parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="TResult">The type of the retun value of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <param name="func">The function that will be memoized.</param>
+        /// <typeparam name="T1">The type of the first parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="T2">The type of the second parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T3">The type of the third parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T4">The type of the fourth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T5">The type of the fifth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T6">The type of the sixth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T7">The type of the seventh parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="TResult">The type of the retun value of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <param name="func">The encapsulated method that this delegate will memoize.</param>
         /// <param name="isExpirable">A value that specifies whether the garbage collector can collect the memoized values.</param>
-        /// <returns>A memoized version of the given <paramref name="func"/>.</returns>
+        /// <returns>A memoized version of the encapsulated method represented by the <paramref name="func"/> parameter.</returns>
         public static Func<T1, T2, T3, T4, T5, T6, T7, TResult> Memoize<T1, T2, T3, T4, T5, T6, T7, TResult>(
             this Func<T1, T2, T3, T4, T5, T6, T7, TResult> func,
             bool isExpirable = false)
@@ -158,20 +159,20 @@ namespace Funky
         }
 
         /// <summary>
-        /// Memoizes a <paramref name="func"/> that has 8 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
+        /// Memoizes an encapsulated method that has 8 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
         /// </summary>
-        /// <typeparam name="T1">The type of the first parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="T2">The type of the second parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T3">The type of the third parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T4">The type of the fourth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T5">The type of the fifth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T6">The type of the sixth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T7">The type of the seventh parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T8">The type of the eighth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="TResult">The type of the retun value of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <param name="func">The function that will be memoized.</param>
+        /// <typeparam name="T1">The type of the first parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="T2">The type of the second parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T3">The type of the third parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T4">The type of the fourth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T5">The type of the fifth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T6">The type of the sixth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T7">The type of the seventh parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T8">The type of the eighth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="TResult">The type of the retun value of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <param name="func">The encapsulated method that this delegate will memoize.</param>
         /// <param name="isExpirable">A value that specifies whether the garbage collector can collect the memoized values.</param>
-        /// <returns>A memoized version of the given <paramref name="func"/>.</returns>
+        /// <returns>A memoized version of the encapsulated method represented by the <paramref name="func"/> parameter.</returns>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> Memoize<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(
             this Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> func,
             bool isExpirable = false)
@@ -183,21 +184,21 @@ namespace Funky
         }
 
         /// <summary>
-        /// Memoizes a <paramref name="func"/> that has 9 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
+        /// Memoizes an encapsulated method that has 9 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
         /// </summary>
-        /// <typeparam name="T1">The type of the first parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="T2">The type of the second parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T3">The type of the third parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T4">The type of the fourth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T5">The type of the fifth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T6">The type of the sixth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T7">The type of the seventh parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T8">The type of the eighth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T9">The type of the ninth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="TResult">The type of the retun value of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <param name="func">The function that will be memoized.</param>
+        /// <typeparam name="T1">The type of the first parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="T2">The type of the second parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T3">The type of the third parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T4">The type of the fourth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T5">The type of the fifth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T6">The type of the sixth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T7">The type of the seventh parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T8">The type of the eighth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T9">The type of the ninth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="TResult">The type of the retun value of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <param name="func">The encapsulated method that this delegate will memoize.</param>
         /// <param name="isExpirable">A value that specifies whether the garbage collector can collect the memoized values.</param>
-        /// <returns>A memoized version of the given <paramref name="func"/>.</returns>
+        /// <returns>A memoized version of the encapsulated method represented by the <paramref name="func"/> parameter.</returns>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> Memoize<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(
             this Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> func,
             bool isExpirable = false)
@@ -209,22 +210,22 @@ namespace Funky
         }
 
         /// <summary>
-        /// Memoizes a <paramref name="func"/> that has 10 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
+        /// Memoizes an encapsulated method that has 10 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
         /// </summary>
-        /// <typeparam name="T1">The type of the first parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="T2">The type of the second parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T3">The type of the third parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T4">The type of the fourth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T5">The type of the fifth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T6">The type of the sixth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T7">The type of the seventh parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T8">The type of the eighth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T9">The type of the ninth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T10">The type of the tenth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="TResult">The type of the retun value of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <param name="func">The function that will be memoized.</param>
+        /// <typeparam name="T1">The type of the first parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="T2">The type of the second parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T3">The type of the third parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T4">The type of the fourth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T5">The type of the fifth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T6">The type of the sixth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T7">The type of the seventh parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T8">The type of the eighth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T9">The type of the ninth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T10">The type of the tenth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="TResult">The type of the retun value of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <param name="func">The encapsulated method that this delegate will memoize.</param>
         /// <param name="isExpirable">A value that specifies whether the garbage collector can collect the memoized values.</param>
-        /// <returns>A memoized version of the given <paramref name="func"/>.</returns>
+        /// <returns>A memoized version of the encapsulated method represented by the <paramref name="func"/> parameter.</returns>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> Memoize<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(
             this Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> func,
             bool isExpirable = false)
@@ -236,23 +237,23 @@ namespace Funky
         }
 
         /// <summary>
-        /// Memoizes a <paramref name="func"/> that has 11 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
+        /// Memoizes an encapsulated method that has 11 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
         /// </summary>
-        /// <typeparam name="T1">The type of the first parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="T2">The type of the second parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T3">The type of the third parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T4">The type of the fourth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T5">The type of the fifth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T6">The type of the sixth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T7">The type of the seventh parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T8">The type of the eighth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T9">The type of the ninth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T10">The type of the tenth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T11">The type of the elevenh parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="TResult">The type of the retun value of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <param name="func">The function that will be memoized.</param>
+        /// <typeparam name="T1">The type of the first parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="T2">The type of the second parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T3">The type of the third parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T4">The type of the fourth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T5">The type of the fifth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T6">The type of the sixth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T7">The type of the seventh parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T8">The type of the eighth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T9">The type of the ninth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T10">The type of the tenth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T11">The type of the elevenh parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="TResult">The type of the retun value of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <param name="func">The encapsulated method that this delegate will memoize.</param>
         /// <param name="isExpirable">A value that specifies whether the garbage collector can collect the memoized values.</param>
-        /// <returns>A memoized version of the given <paramref name="func"/>.</returns>
+        /// <returns>A memoized version of the encapsulated method represented by the <paramref name="func"/> parameter.</returns>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> Memoize<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(
             this Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> func,
             bool isExpirable = false)
@@ -264,24 +265,24 @@ namespace Funky
         }
 
         /// <summary>
-        /// Memoizes a <paramref name="func"/> that has 12 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
+        /// Memoizes an encapsulated method that has 12 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
         /// </summary>
-        /// <typeparam name="T1">The type of the first parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="T2">The type of the second parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T3">The type of the third parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T4">The type of the fourth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T5">The type of the fifth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T6">The type of the sixth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T7">The type of the seventh parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T8">The type of the eighth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T9">The type of the ninth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T10">The type of the tenth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T11">The type of the elevenh parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T12">The type of the twelfth parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="TResult">The type of the retun value of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <param name="func">The function that will be memoized.</param>
+        /// <typeparam name="T1">The type of the first parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="T2">The type of the second parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T3">The type of the third parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T4">The type of the fourth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T5">The type of the fifth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T6">The type of the sixth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T7">The type of the seventh parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T8">The type of the eighth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T9">The type of the ninth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T10">The type of the tenth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T11">The type of the elevenh parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T12">The type of the twelfth parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="TResult">The type of the retun value of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <param name="func">The encapsulated method that this delegate will memoize.</param>
         /// <param name="isExpirable">A value that specifies whether the garbage collector can collect the memoized values.</param>
-        /// <returns>A memoized version of the given <paramref name="func"/>.</returns>
+        /// <returns>A memoized version of the encapsulated method represented by the <paramref name="func"/> parameter.</returns>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> Memoize<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(
             this Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> func,
             bool isExpirable = false)
@@ -293,25 +294,25 @@ namespace Funky
         }
 
         /// <summary>
-        /// Memoizes a <paramref name="func"/> that has 13 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
+        /// Memoizes an encapsulated method that has 13 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
         /// </summary>
-        /// <typeparam name="T1">The type of the first parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="T2">The type of the second parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T3">The type of the third parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T4">The type of the fourth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T5">The type of the fifth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T6">The type of the sixth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T7">The type of the seventh parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T8">The type of the eighth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T9">The type of the ninth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T10">The type of the tenth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T11">The type of the elevenh parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T12">The type of the twelfth parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="T13">The type of the thirteenth parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="TResult">The type of the retun value of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <param name="func">The function that will be memoized.</param>
+        /// <typeparam name="T1">The type of the first parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="T2">The type of the second parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T3">The type of the third parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T4">The type of the fourth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T5">The type of the fifth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T6">The type of the sixth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T7">The type of the seventh parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T8">The type of the eighth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T9">The type of the ninth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T10">The type of the tenth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T11">The type of the elevenh parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T12">The type of the twelfth parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="T13">The type of the thirteenth parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="TResult">The type of the retun value of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <param name="func">The encapsulated method that this delegate will memoize.</param>
         /// <param name="isExpirable">A value that specifies whether the garbage collector can collect the memoized values.</param>
-        /// <returns>A memoized version of the given <paramref name="func"/>.</returns>
+        /// <returns>A memoized version of the encapsulated method represented by the <paramref name="func"/> parameter.</returns>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> Memoize<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(
             this Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> func,
             bool isExpirable = false)
@@ -323,26 +324,26 @@ namespace Funky
         }
 
         /// <summary>
-        /// Memoizes a <paramref name="func"/> that has 14 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
+        /// Memoizes an encapsulated method that has 14 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
         /// </summary>
-        /// <typeparam name="T1">The type of the first parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="T2">The type of the second parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T3">The type of the third parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T4">The type of the fourth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T5">The type of the fifth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T6">The type of the sixth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T7">The type of the seventh parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T8">The type of the eighth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T9">The type of the ninth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T10">The type of the tenth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T11">The type of the elevenh parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T12">The type of the twelfth parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="T13">The type of the thirteenth parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="T14">The type of the fourteenth parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="TResult">The type of the retun value of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <param name="func">The function that will be memoized.</param>
+        /// <typeparam name="T1">The type of the first parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="T2">The type of the second parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T3">The type of the third parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T4">The type of the fourth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T5">The type of the fifth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T6">The type of the sixth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T7">The type of the seventh parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T8">The type of the eighth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T9">The type of the ninth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T10">The type of the tenth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T11">The type of the elevenh parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T12">The type of the twelfth parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="T13">The type of the thirteenth parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="T14">The type of the fourteenth parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="TResult">The type of the retun value of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <param name="func">The encapsulated method that this delegate will memoize.</param>
         /// <param name="isExpirable">A value that specifies whether the garbage collector can collect the memoized values.</param>
-        /// <returns>A memoized version of the given <paramref name="func"/>.</returns>
+        /// <returns>A memoized version of the encapsulated method represented by the <paramref name="func"/> parameter.</returns>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> Memoize<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(
             this Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> func,
             bool isExpirable = false)
@@ -354,27 +355,27 @@ namespace Funky
         }
 
         /// <summary>
-        /// Memoizes a <paramref name="func"/> that has 15 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
+        /// Memoizes an encapsulated method that has 15 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
         /// </summary>
-        /// <typeparam name="T1">The type of the first parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="T2">The type of the second parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T3">The type of the third parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T4">The type of the fourth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T5">The type of the fifth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T6">The type of the sixth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T7">The type of the seventh parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T8">The type of the eighth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T9">The type of the ninth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T10">The type of the tenth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T11">The type of the elevenh parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T12">The type of the twelfth parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="T13">The type of the thirteenth parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="T14">The type of the fourteenth parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="T15">The type of the fifteenth parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="TResult">The type of the retun value of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <param name="func">The function that will be memoized.</param>
+        /// <typeparam name="T1">The type of the first parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="T2">The type of the second parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T3">The type of the third parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T4">The type of the fourth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T5">The type of the fifth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T6">The type of the sixth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T7">The type of the seventh parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T8">The type of the eighth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T9">The type of the ninth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T10">The type of the tenth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T11">The type of the elevenh parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T12">The type of the twelfth parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="T13">The type of the thirteenth parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="T14">The type of the fourteenth parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="T15">The type of the fifteenth parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="TResult">The type of the retun value of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <param name="func">The encapsulated method that this delegate will memoize.</param>
         /// <param name="isExpirable">A value that specifies whether the garbage collector can collect the memoized values.</param>
-        /// <returns>A memoized version of the given <paramref name="func"/>.</returns>
+        /// <returns>A memoized version of the encapsulated method represented by the <paramref name="func"/> parameter.</returns>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> Memoize<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(
             this Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> func,
             bool isExpirable = false)
@@ -386,28 +387,28 @@ namespace Funky
         }
 
         /// <summary>
-        /// Memoizes a <paramref name="func"/> that has 16 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
+        /// Memoizes an encapsulated method that has 16 parameters and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
         /// </summary>
-        /// <typeparam name="T1">The type of the first parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="T2">The type of the second parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T3">The type of the third parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T4">The type of the fourth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T5">The type of the fifth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T6">The type of the sixth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T7">The type of the seventh parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T8">The type of the eighth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T9">The type of the ninth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T10">The type of the tenth parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T11">The type of the elevenh parameter of the <paramref name="func"/> that this method will memoize</typeparam>
-        /// <typeparam name="T12">The type of the twelfth parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="T13">The type of the thirteenth parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="T14">The type of the fourteenth parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="T15">The type of the fifteenth parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="T16">The type of the sixteenth parameter of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <typeparam name="TResult">The type of the retun value of the <paramref name="func"/> that this method will memoize.</typeparam>
-        /// <param name="func">The function that will be memoized.</param>
+        /// <typeparam name="T1">The type of the first parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="T2">The type of the second parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T3">The type of the third parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T4">The type of the fourth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T5">The type of the fifth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T6">The type of the sixth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T7">The type of the seventh parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T8">The type of the eighth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T9">The type of the ninth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T10">The type of the tenth parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T11">The type of the elevenh parameter of the encapsulated method that this delegate will memoize</typeparam>
+        /// <typeparam name="T12">The type of the twelfth parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="T13">The type of the thirteenth parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="T14">The type of the fourteenth parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="T15">The type of the fifteenth parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="T16">The type of the sixteenth parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="TResult">The type of the retun value of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <param name="func">The encapsulated method that this delegate will memoize.</param>
         /// <param name="isExpirable">A value that specifies whether the garbage collector can collect the memoized values.</param>
-        /// <returns>A memoized version of the given <paramref name="func"/>.</returns>
+        /// <returns>A memoized version of the encapsulated method represented by the <paramref name="func"/> parameter.</returns>
         public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> Memoize<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(
             this Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> func,
             bool isExpirable = false)
