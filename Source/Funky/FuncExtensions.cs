@@ -7,7 +7,7 @@ namespace Funky
         /// <summary>
         /// Memoizes an encapsulated method that has 1 parameter and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
         /// </summary>
-        /// <typeparam name="T">The type of the first parameter of the encapsulated method that this delegate will memoize.</typeparam>
+        /// <typeparam name="T">The type of the parameter of the encapsulated method that this delegate will memoize.</typeparam>
         /// <typeparam name="TResult">The type of the retun value of the encapsulated method that this delegate will memoize.</typeparam>
         /// <param name="func">The encapsulated method that this delegate will memoize.</param>
         /// <param name="isExpirable">A value that specifies whether the garbage collector can collect the memoized values.</param>
