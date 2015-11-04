@@ -2,23 +2,32 @@
 
 namespace Funky
 {
-    public class ExpirableMemoizer<TArg, TResult> : MemoizerBase<TArg, TResult, WeakReference>
+    /// <summary>
+    /// Represents a thread-safe memoizer for a given <see cref="Func{TKey, TValue}"/>.  The memoizer's cached values can be expire and be garbage-collected.
+    /// </summary>
+    /// <typeparam name="TKey">The type of the memoizer's keys.</typeparam>
+    /// <typeparam name="TValue">The type of the memoizer's return values.</typeparam>
+    public class ExpirableMemoizer<TKey, TValue> : MemoizerBase<TKey, TValue, WeakReference>
     {
-        public ExpirableMemoizer(Func<TArg, TResult> func)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExpirableMemoizer{TKey, TValue}"/> class.
+        /// </summary>
+        /// <param name="func">The encapsulated method that this memoizer will memoize.</param>
+        public ExpirableMemoizer(Func<TKey, TValue> func)
             : base(func)
         {
         }
 
-        protected override TResult SetCacheValue(TArg key)
+        protected override TValue SetValue(TKey key)
         {
             var value = Func(key);
             Cache.Add(key, new WeakReference(value));
             return value;
         }
 
-        protected override TResult GetCacheValue(TArg key)
+        protected override TValue GetValue(TKey key)
         {
-            TResult value;
+            TValue value;
             var weakReference = Cache[key];
             if (weakReference.Target == null)
             {
@@ -27,13 +36,13 @@ namespace Funky
             }
             else
             {
-                value = (TResult)weakReference.Target;
+                value = (TValue)weakReference.Target;
             }
 
             return value;
         }
 
-        protected override bool ValueExists(TArg key)
+        protected override bool ContainsKey(TKey key)
         {
             return Cache.ContainsKey(key);
         }

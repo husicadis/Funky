@@ -4,9 +4,15 @@ using System.Threading;
 
 namespace Funky
 {
-    public abstract class MemoizerBase<TArg, TResult, TCache> : IMemoizeFunctions<TArg, TResult>
+    /// <summary>
+    /// Represents a thread-safe memoizer for a given <see cref="Func{TKey, TValue}"/>.
+    /// </summary>
+    /// <typeparam name="TKey">The type of the memoizer's keys.</typeparam>
+    /// <typeparam name="TValue">The type of the memoizer's return values.</typeparam>
+    /// <typeparam name="TCachedValue">The type of the memoizer's cahced values.</typeparam>
+    public abstract class MemoizerBase<TKey, TValue, TCachedValue> : IMemoizeThings<TKey, TValue>
     {
-        protected MemoizerBase(Func<TArg, TResult> func)
+        protected MemoizerBase(Func<TKey, TValue> func)
             : this()
         {
             Func = func;
@@ -14,18 +20,23 @@ namespace Funky
 
         private MemoizerBase()
         {
-            Cache = new Dictionary<TArg, TCache>();
+            Cache = new Dictionary<TKey, TCachedValue>();
             CacheLock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
         }
 
-        public TResult GetOrInvoke(TArg key)
+        /// <summary>
+        /// Gets or adds a key/value pair from the memoizer if it already exists.  Adds a key/value pair to the memoizer if it does not already exist.
+        /// </summary>
+        /// <param name="key">The key of the element to get or add.</param>
+        /// <returns>The value for the key.  This will be either the existing value for the key if the key is already in the memoizer, or the new value if the key was not in the memoizer.</returns>
+        public TValue GetOrAdd(TKey key)
         {
-            TResult result;
+            TValue result;
 
             CacheLock.EnterWriteLock();
             try
             {
-                result = ValueExists(key) ? GetCacheValue(key) : SetCacheValue(key);
+                result = this.ContainsKey(key) ? this.GetValue(key) : this.SetValue(key);
             }
             finally
             {
@@ -35,16 +46,16 @@ namespace Funky
             return result;
         }
 
-        protected abstract TResult SetCacheValue(TArg key);
+        protected abstract bool ContainsKey(TKey key);
 
-        protected abstract TResult GetCacheValue(TArg key);
+        protected abstract TValue SetValue(TKey key);
 
-        protected abstract bool ValueExists(TArg key);
+        protected abstract TValue GetValue(TKey key);
 
-        protected Dictionary<TArg, TCache> Cache { get; private set; }
+        protected Dictionary<TKey, TCachedValue> Cache { get; private set; }
 
-        protected ReaderWriterLockSlim CacheLock { get; private set; }
+        protected ReaderWriterLockSlim CacheLock { get; }
 
-        protected Func<TArg, TResult> Func { get; private set; }
+        protected Func<TKey, TValue> Func { get; private set; }
     }
 }
