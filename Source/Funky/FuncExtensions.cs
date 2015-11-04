@@ -26,7 +26,7 @@ namespace Funky
                 memoizer = new Memoizer<T, TResult>(func);
             }
 
-            return argument => memoizer.GetOrInvoke(argument);
+            return argument => memoizer[argument];
         }
 
         /// <summary>
