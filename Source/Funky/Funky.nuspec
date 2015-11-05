@@ -12,6 +12,6 @@
     <description>$description$</description>
     <releaseNotes>This is the initial release.</releaseNotes>
     <copyright>Copyright 2015</copyright>
-    <tags>Func</tags>
+    <tags>.Net, C#, VB.Net, Func</tags>
   </metadata>
 </package>
