@@ -1,2 +1,8 @@
 language: csharp
 solution: ./Source/Funky.sln
+install:
+  - nuget restore ./Source/Funky.sln
+  - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory nunit-runner
+script:
+  - xbuild /p:Configuration=Release solution-name.sln
+  - mono ./nunit-runner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./Source/Funky.UnitTests/bin/Release/Funky.UnitTests.dll
