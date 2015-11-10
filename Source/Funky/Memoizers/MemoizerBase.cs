@@ -36,9 +36,9 @@ namespace Funky
             CacheLock.EnterUpgradeableReadLock();
             try
             {
-                if (this.ContainsKey(key))
+                if (ContainsKey(key))
                 {
-                    return this.GetValue(key);
+                    return GetValue(key);
                 }
                 else
                 {
@@ -46,7 +46,7 @@ namespace Funky
                     
                     try
                     {
-                        result = this.ContainsKey(key) ? this.GetValue(key) : this.SetValue(key);
+                        result = ContainsKey(key) ? GetValue(key) : SetValue(key);
                     }
                     finally
                     {
@@ -70,7 +70,7 @@ namespace Funky
 
         protected Dictionary<TKey, TCachedValue> Cache { get; private set; }
 
-        protected ReaderWriterLockSlim CacheLock { get; }
+        protected ReaderWriterLockSlim CacheLock { get; private set; }
 
         protected Func<TKey, TValue> Func { get; private set; }
     }
