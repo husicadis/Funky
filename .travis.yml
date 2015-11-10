@@ -1,2 +1,2 @@
 language: csharp
-solution: .\Source\Funky.sln
+solution: ./Source/Funky.sln
