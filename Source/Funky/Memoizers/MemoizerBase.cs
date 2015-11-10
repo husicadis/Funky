@@ -32,7 +32,7 @@ namespace Funky
         public TValue GetOrAdd(TKey key)
         {
             TValue result;
-            
+
             CacheLock.EnterUpgradeableReadLock();
             try
             {
