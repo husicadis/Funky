@@ -32,15 +32,31 @@ namespace Funky
         public TValue GetOrAdd(TKey key)
         {
             TValue result;
-
-            CacheLock.EnterWriteLock();
+            
+            CacheLock.EnterUpgradeableReadLock();
             try
             {
-                result = this.ContainsKey(key) ? this.GetValue(key) : this.SetValue(key);
+                if (this.ContainsKey(key))
+                {
+                    return this.GetValue(key);
+                }
+                else
+                {
+                    CacheLock.EnterWriteLock();
+                    
+                    try
+                    {
+                        result = this.ContainsKey(key) ? this.GetValue(key) : this.SetValue(key);
+                    }
+                    finally
+                    {
+                        CacheLock.ExitWriteLock();
+                    }
+                }
             }
             finally
             {
-                CacheLock.ExitWriteLock();
+                CacheLock.ExitUpgradeableReadLock();
             }
 
             return result;
