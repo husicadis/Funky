@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace Funky
 {
@@ -7,6 +8,26 @@ namespace Funky
     /// </summary>
     public static class FuncExtensions
     {
+        /// <summary>
+        /// Enters a write lock on the given <see cref="ReaderWriterLockSlim"/>, invokes the given <see cref="Func{TResult}"/>, exits the write lock, and returns the result of the <paramref name="func"/>.
+        /// </summary>
+        /// <typeparam name="TResult">The return type.</typeparam>
+        /// <param name="func">The function to invoke inside a write lock.</param>
+        /// <param name="locker">The <see cref="ReaderWriterLockSlim"/> to use for locking.</param>
+        /// <returns>The result of the <paramref name="func"/>.</returns>
+        public static TResult InvokeWithWriteLock<TResult>(this Func<TResult> func, ReaderWriterLockSlim locker)
+        {
+            locker.EnterWriteLock();
+            try
+            {
+                return func();
+            }
+            finally
+            {
+                locker.ExitWriteLock();
+            }
+        }
+
         /// <summary>
         /// Memoizes an encapsulated method that has 1 parameter and returns a value of the type specified by the <typeparamref name="TResult"/> parameter.
         /// </summary>
