@@ -45,7 +45,6 @@
     </Compile>
     <Compile Include="Memoizers\ExpirableMemoizer.cs" />
     <Compile Include="FuncExtensions.cs" />
-    <Compile Include="Memoizers\ReaderWriterLockSlimExtensions.cs" />
     <Compile Include="Memoizers\Memoizer.cs" />
     <Compile Include="Memoizers\MemoizerBase.cs" />
     <Compile Include="Memoizers\IMemoizeThings.cs" />

@@ -48,7 +48,8 @@ namespace Funky
                 }
                 else
                 {
-                    result = CacheLock.InvokeWithWriteLock(() => GetOrSetValue(key));
+                    Func<TValue> func = () => GetOrSetValue(key);
+                    result = func.InvokeWithWriteLock(CacheLock);
                 }
             }
             finally
