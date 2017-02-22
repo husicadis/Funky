@@ -8,7 +8,9 @@ namespace Funky.UnitTests.Memoizers
     [TestFixture]
     public class FuncExtensionsTests
     {
-        private const int InvocationCount = 1000;
+        private const int InvocationCount = 100;
+
+        private readonly object _callCountLock = new object();
 
         [Test]
         public void FuncMemoizedWithUnExpirableMemoizerShouldOnlyBeCalledOnceFromParallelForLoop()
@@ -47,6 +49,7 @@ namespace Funky.UnitTests.Memoizers
                 {
                     callCount++;
                 }
+
                 return i * i;
             };
 
@@ -54,7 +57,6 @@ namespace Funky.UnitTests.Memoizers
 
             // Act
             Parallel.For(0, InvocationCount, Assert2SquaredIs4(memoized));
-
 
             // Assert
             Console.WriteLine(callCount);
@@ -330,7 +332,7 @@ namespace Funky.UnitTests.Memoizers
             var memoized = getProduct.Memoize();
 
             // Act
-            Parallel.For(0, InvocationCount, Assert2ToTheTwelvthIs4096(memoized));
+            Parallel.For(0, InvocationCount, Assert2ToTheTwelfthIs4096(memoized));
 
             // Assert
             callCount.Should().Be(1);
@@ -535,7 +537,7 @@ namespace Funky.UnitTests.Memoizers
             };
         }
 
-        private static Action<int> Assert2ToTheTwelvthIs4096(Func<int, int, int, int, int, int, int, int, int, int, int, int, int> func)
+        private static Action<int> Assert2ToTheTwelfthIs4096(Func<int, int, int, int, int, int, int, int, int, int, int, int, int> func)
         {
             return delegate
             {
@@ -579,7 +581,5 @@ namespace Funky.UnitTests.Memoizers
                 result.Should().Be(65536);
             };
         }
-
-        private readonly object _callCountLock = new object();
     }
 }
