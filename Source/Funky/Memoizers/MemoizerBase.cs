@@ -9,7 +9,7 @@ namespace Funky
     /// </summary>
     /// <typeparam name="TKey">The type of the memoizer's keys.</typeparam>
     /// <typeparam name="TValue">The type of the memoizer's return values.</typeparam>
-    /// <typeparam name="TCachedValue">The type of the memoizer's cahced values.</typeparam>
+    /// <typeparam name="TCachedValue">The type of the memoizer's cached values.</typeparam>
     public abstract class MemoizerBase<TKey, TValue, TCachedValue> : IMemoizeThings<TKey, TValue>
     {
         protected MemoizerBase(Func<TKey, TValue> func)
@@ -23,6 +23,12 @@ namespace Funky
             Cache = new Dictionary<TKey, TCachedValue>();
             CacheLock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
         }
+
+        protected Dictionary<TKey, TCachedValue> Cache { get; }
+
+        protected ReaderWriterLockSlim CacheLock { get; }
+
+        protected Func<TKey, TValue> Func { get; private set; }
 
         /// <summary>
         /// Gets or adds a key/value pair from the memoizer if it already exists.  Adds a key/value pair to the memoizer if it does not already exist.
@@ -42,16 +48,7 @@ namespace Funky
                 }
                 else
                 {
-                    CacheLock.EnterWriteLock();
-                    
-                    try
-                    {
-                        result = ContainsKey(key) ? GetValue(key) : SetValue(key);
-                    }
-                    finally
-                    {
-                        CacheLock.ExitWriteLock();
-                    }
+                    result = CacheLock.InvokeWithWriteLock(() => GetOrSetValue(key));
                 }
             }
             finally
@@ -68,10 +65,11 @@ namespace Funky
 
         protected abstract TValue GetValue(TKey key);
 
-        protected Dictionary<TKey, TCachedValue> Cache { get; private set; }
-
-        protected ReaderWriterLockSlim CacheLock { get; private set; }
-
-        protected Func<TKey, TValue> Func { get; private set; }
+        private TValue GetOrSetValue(TKey key)
+        {
+            return ContainsKey(key)
+                ? GetValue(key)
+                : SetValue(key);
+        }
     }
 }
