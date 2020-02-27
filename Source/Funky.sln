@@ -7,7 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Funky.UnitTests", "Funky.Un
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2FBA5771-ADB7-4C80-9492-0C1C6DDB6C85}"
 	ProjectSection(SolutionItems) = preProject
-		AssemblyVersionInfo.cs = AssemblyVersionInfo.cs
 		StrongNameKey.snk = StrongNameKey.snk
 	EndProjectSection
 EndProject
