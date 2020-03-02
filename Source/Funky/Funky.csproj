@@ -4,6 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Description>A Library of Func Extensions.</Description>
     <PackageLicenseUrl>https://raw.githubusercontent.com/ericburcham/Funky/master/LICENSE</PackageLicenseUrl>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>StrongNameKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
 </Project>
